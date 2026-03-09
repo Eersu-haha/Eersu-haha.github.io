@@ -17,8 +17,8 @@ h3 { font-size: 12px; color: #374151; margin: 15px 0 10px 0; font-weight: bold; 
     margin: 15px 0;
 }
 .kpi-row {
-    display: flex;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 .kpi-box { 
@@ -85,7 +85,7 @@ tr:nth-child(even) { background: #f9fafb; }
     </div>
     
     <!-- 第二行：有任务需求指标 -->
-    <div class="kpi-row">
+    <div class="kpi-row style="flex-start;">
         <div class="kpi-box">
             <span class="kpi-number">251</span>
             <span class="kpi-label">有任务的需求总数（个）</span>
@@ -186,7 +186,7 @@ tr:nth-child(even) { background: #f9fafb; }
 <h2>03 角色分工效能</h2>
 
 <table>
-<tr><th>角色</th><th>任务数</th><th>总工时</th><th>工时占比</th><th>平均工时/任务</th></tr>
+<tr><th>角色</th><th>任务数</th><th>总工时</th><th>工时占比</th><th>平均工时（小时/任务）</th></tr>
 <tr><td>前端</td><td>34个</td><td>429.6h</td><td>5.5%</td><td><strong>12.64h</strong></td></tr>
 <tr><td>后端</td><td>235个</td><td>6,102.1h</td><td>77.5%</td><td style="color: #f59e0b; font-weight: bold;">25.97h</td></tr>
 <tr><td>测试</td><td>201个</td><td>1,335.6h</td><td>17.0%</td><td><strong>6.64h</strong></td></tr>
@@ -194,35 +194,11 @@ tr:nth-child(even) { background: #f9fafb; }
 </table>
 
 <table>
-<tr><th>角色</th><th>人数</th><th>总工时</th><th>单位工时（小时/人）</th><th>人效评估</th></tr>
-<tr>
-    <td>前端</td>
-    <td>5人</td>
-    <td>429.6h</td>
-    <td style= "font-weight: bold;">85.92h</td>
-    <td>人均投入相对较低</td>
-</tr>
-<tr>
-    <td>后端</td>
-    <td>17人</td>
-    <td>6,102.1h</td>
-    <td style="color: #f59e0b; font-weight: bold; font-size: 11px;">358.95h</td>
-    <td>人均投入相对较高</td>
-</tr>
-<tr>
-    <td>测试</td>
-    <td>7人</td>
-    <td>1,335.6h</td>
-    <td style="font-weight: bold;">190.80h</td>
-    <td>人均投入相对适中</td>
-</tr>
-<tr style="background:#eff6ff; font-weight: bold;">
-    <td>合计</td>
-    <td>29人</td>
-    <td>7,867.3h</td>
-    <td>271.29h</td>
-    <td style="font-size: 11px;"></td>
-</tr>
+<tr><th>角色</th><th>人员数</th><th>总工时</th><th>人效评估</th><th>单位工时（小时/人）</th></tr>
+<tr><td>前端</td><td>5人</td><td>429.6h</td><td>人均投入相对较低</td><td style= "font-weight: bold;">85.92h</td></tr>
+<tr><td>后端</td><td>17人</td><td>6,102.1h</td><td>人均投入相对较高</td><td style="color: #f59e0b; font-weight: bold; font-size: 11px;">358.95h</td></tr>
+<tr><td>测试</td><td>7人</td><td>1,335.6h</td><td>人均投入相对适中</td><td style="font-weight: bold;">190.80h</td></tr>
+<tr style="background:#eff6ff; font-weight: bold;"><td>合计</td><td>29人</td><td>7,867.3h</td><td style="font-size: 11px;"></td><td>271.29h</td></tr>
 </table>
 
 
