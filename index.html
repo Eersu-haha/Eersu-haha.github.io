@@ -18,7 +18,7 @@ h3 { font-size: 12px; color: #374151; margin: 15px 0 10px 0; font-weight: bold; 
 }
 .kpi-row {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
 }
 .kpi-box { 
@@ -68,15 +68,19 @@ tr:nth-child(even) { background: #f9fafb; }
     <div class="kpi-row">
         <div class="kpi-box">
             <span class="kpi-number">401</span>
-            <span class="kpi-label">总需求数（个）</span>
+            <span class="kpi-label">需求总数（个）</span>
+        </div>
+        <div class="kpi-box">
+            <span class="kpi-number">7,918.9</span>
+            <span class="kpi-label">投入总工时（小时）</span>
         </div>
         <div class="kpi-box">
             <span class="kpi-number">19.75</span>
-            <span class="kpi-label">平均需求工时（h/需求）</span>
+            <span class="kpi-label">需求平均工时（h/需求）</span>
         </div>
         <div class="kpi-box">
             <span class="kpi-number">4.9</span>
-            <span class="kpi-label">工时中位数（h/需求）</span>
+            <span class="kpi-label">工时中位数（小时）</span>
         </div>
     </div>
     
@@ -84,21 +88,18 @@ tr:nth-child(even) { background: #f9fafb; }
     <div class="kpi-row">
         <div class="kpi-box">
             <span class="kpi-number">251</span>
-            <span class="kpi-label">有任务需求总数（个）</span>
+            <span class="kpi-label">有任务的需求总数（个）</span>
         </div>
         <div class="kpi-box">
-            <span class="kpi-number">7,918.9</span>
-            <span class="kpi-label">总投入工时（小时）</span>
+            <span class="kpi-number">7,918.3</span>
+            <span class="kpi-label">投入总工时（小时）</span>
         </div>
         <div class="kpi-box">
             <span class="kpi-number">31.55</span>
-            <span class="kpi-label">有任务需求平均工时（h/需求）</span>
+            <span class="kpi-label">有任务的需求平均工时（h/需求）</span>
         </div>
     </div>
 </div>
-
-<h3>核心发现</h3>
-<p style="font-size: 11px;">无任务需求占比<span class="highlight">37.4%（150个）</span>，但工时消耗仅0.6小时，说明这类需求处于需求池或初步评估阶段，尚未进入执行环节。<strong>建议定期清理或推进此类需求，优化资源配置。</strong></p>
 
 <h2>02 需求类型分析</h2>
 
@@ -110,22 +111,125 @@ tr:nth-child(even) { background: #f9fafb; }
 <tr><td>工时中位数</td><td>-</td><td>4.9h/需求</td><td><span class="highlight">平均值是中位数的6.4倍</span>，存在严重右偏态</td></tr>
 </table>
 
-<div class="warning">
-<strong>⚠️ 关键风险：</strong>平均工时（31.55h）远高于中位数（4.9h），表明少数"长尾需求"消耗大量工时，是效率瓶颈所在。
+<!-- 无任务需求阶段分布图表 - 饼图风格 -->
+ <table>
+<div style="margin: 15px 0; padding: 15px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+    <h3 style="margin: 0 0 15px 0; font-size: 12px; color: #374151;">无任务需求阶段分布（共150个）</h3>
+    
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <!-- 左侧饼图模拟 -->
+        <div style="position: relative; width: 150px; height: 150px;">
+            <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                <!-- 未开始 30.7% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#f59e0b" stroke-width="20" 
+                        stroke-dasharray="77 160" stroke-dashoffset="-97"/>
+                <!-- 需求评审通过 0.7% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ec4899" stroke-width="20" 
+                        stroke-dasharray="2 160" stroke-dashoffset="-249"/>
+                 <!-- 研发完毕 3.3% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="20" 
+                        stroke-dasharray="8 160" stroke-dashoffset="-236"/>
+                <!-- 测试完毕 2.0% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="20" 
+                        stroke-dasharray="5 160" stroke-dashoffset="-244"/>
+                <!-- 已发布 38.7% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="20" 
+                        stroke-dasharray="97 160" stroke-dashoffset="0"/>
+                <!-- 已关闭 24.7% -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#6b7280" stroke-width="20" 
+                        stroke-dasharray="62 160" stroke-dashoffset="-174"/>
+                               
+            </svg>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <div style="font-size: 20px; font-weight: bold; color: #374151;">150</div>
+                <div style="font-size: 10px; color: #6b7280;">总计</div>
+            </div>
+        </div>
+        
+        <!-- 右侧图例 -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">未开始 <strong>46</strong> (30.7%)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #ec4899; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">需求评审通过 <strong>1</strong> (0.7%)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #3b82f6; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">研发完毕 <strong>5</strong> (3.3%)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #8b5cf6; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">测试完毕 <strong>3</strong> (2.0%)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #10b981; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">已发布 <strong>58</strong> (38.7%)</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 12px; height: 12px; background: #6b7280; border-radius: 2px;"></div>
+                <div style="flex: 1; font-size: 11px; color: #4b5563;">已关闭 <strong>37</strong> (24.7%)</div>
+            </div>
+            </div>
+    </div>
+    </table>
+    
+    <div class="warning">
+<strong>⚠️ 数据呈现：<br>
+</strong>①平均工时（31.55h）远高于中位数（4.9h），警惕少数"长尾需求"消耗大量工时，建议提升尾部工作效率。<br>
+</strong>②无任务需求占比37.4%，但工时仅占0.6小时，警惕无任务的工时计算异常，建议检视取数逻辑。<br>
+</strong>③未开始(30.7%)占比高，合计近3成，警惕大量需求处于待启动状态，建议优化需求池管理。<br>
 </div>
 
 <h2>03 角色分工效能</h2>
 
 <table>
-<tr><th>角色</th><th>任务数</th><th>总工时</th><th>平均工时/任务</th><th>工时占比</th><th>关键洞察</th></tr>
-<tr><td><strong>后端</strong></td><td>235个</td><td>6,102.1h</td><td><span class="highlight">25.97h</span></td><td>77.5%</td><td>任务复杂度最高，是项目瓶颈</td></tr>
-<tr><td>测试</td><td>201个</td><td>1,335.6h</td><td>6.64h</td><td>17.0%</td><td>任务数与后端接近，流程标准化</td></tr>
-<tr><td>前端</td><td>34个</td><td>429.6h</td><td>12.64h</td><td>5.5%</td><td>主要负责界面实现</td></tr>
-<tr style="background:#eff6ff;font-weight:bold;"><td>合计</td><td>470个</td><td>7,867.3h</td><td>16.74h</td><td>100%</td><td>后端效率优化是关键</td></tr>
+<tr><th>角色</th><th>任务数</th><th>总工时</th><th>工时占比</th><th>平均工时/任务</th></tr>
+<tr><td>前端</td><td>34个</td><td>429.6h</td><td>5.5%</td><td><strong>12.64h</strong></td></tr>
+<tr><td>后端</td><td>235个</td><td>6,102.1h</td><td>77.5%</td><td style="color: #f59e0b; font-weight: bold;">25.97h</td></tr>
+<tr><td>测试</td><td>201个</td><td>1,335.6h</td><td>17.0%</td><td><strong>6.64h</strong></td></tr>
+<tr style="background:#eff6ff;font-weight:bold;"><td>合计</td><td>470个</td><td>7,867.3h</td><td>100%</td><td>16.74h</td></tr>
 </table>
 
-<div class="success">
-<strong>💡 优化建议：</strong>引入高效后端开发框架、建立代码复用库、部署CI/CD自动化工具，目标降低后端任务平均耗时。
+<table>
+<tr><th>角色</th><th>人数</th><th>总工时</th><th>单位工时（小时/人）</th><th>人效评估</th></tr>
+<tr>
+    <td>前端</td>
+    <td>5人</td>
+    <td>429.6h</td>
+    <td style= "font-weight: bold;">85.92h</td>
+    <td>人均投入相对较低</td>
+</tr>
+<tr>
+    <td>后端</td>
+    <td>17人</td>
+    <td>6,102.1h</td>
+    <td style="color: #f59e0b; font-weight: bold; font-size: 11px;">358.95h</td>
+    <td>人均投入相对较高</td>
+</tr>
+<tr>
+    <td>测试</td>
+    <td>7人</td>
+    <td>1,335.6h</td>
+    <td style="font-weight: bold;">190.80h</td>
+    <td>人均投入相对适中</td>
+</tr>
+<tr style="background:#eff6ff; font-weight: bold;">
+    <td>合计</td>
+    <td>29人</td>
+    <td>7,867.3h</td>
+    <td>271.29h</td>
+    <td style="font-size: 11px;"></td>
+</tr>
+</table>
+
+
+<div class="warning">
+<strong>⚠️ 数据呈现：<br>
+</strong>①前端任务是后端任务的14%，平均工时是后端的49%，警惕长期未关闭/高难度任务的存在。<br>
+</strong>②后端单位工时是前端的4.2倍，是测试的1.9倍，警惕后端任务过载/进度卡点情况的存在。<br>
 </div>
 
 <div class="page-break"></div>
@@ -136,11 +240,11 @@ tr:nth-child(even) { background: #f9fafb; }
 <h3>工时贡献 Top 10</h3>
 <table>
 <tr><th>排名</th><th>姓名</th><th>总工时</th><th>占比</th></tr>
-<tr style="background:#fef3c7;"><td>1</td><td><strong>黄钟睿</strong></td><td>2,205.3h</td><td>28.0%</td></tr>
-<tr style="background:#fef3c7;"><td>2</td><td><strong>陈梓峰</strong></td><td>1,129.3h</td><td>14.4%</td></tr>
-<tr style="background:#fef3c7;"><td>3</td><td><strong>余树新</strong></td><td>867.8h</td><td>11.0%</td></tr>
-<tr><td>4</td><td>陈桂盛</td><td>836.2h</td><td>10.6%</td></tr>
-<tr><td>5</td><td>罗娟</td><td>722.0h</td><td>9.2%</td></tr>
+<tr style="background:#f8f3da;"><td>1</td><td><strong>黄钟睿</strong></td><td>2,205.3h</td><td>28.0%</td></tr>
+<tr style="background:#f8f3da;"><td>2</td><td><strong>陈梓峰</strong></td><td>1,129.3h</td><td>14.4%</td></tr>
+<tr style="background:#f8f3da;"><td>3</td><td><strong>余树新</strong></td><td>867.8h</td><td>11.0%</td></tr>
+<tr style="background:#f8f3da;"><td>4</td><td><strong>陈桂盛</strong></td><td>836.2h</td><td>10.6%</td></tr>
+<tr style="background:#f8f3da;"><td>5</td><td><strong>罗娟</strong></td><td>722.0h</td><td>9.2%</td></tr>
 <tr><td>6</td><td>钟振健</td><td>269.2h</td><td>3.4%</td></tr>
 <tr><td>7</td><td>刘华龙</td><td>250.1h</td><td>3.2%</td></tr>
 <tr><td>8</td><td>余丽静</td><td>221.6h</td><td>2.8%</td></tr>
@@ -148,46 +252,36 @@ tr:nth-child(even) { background: #f9fafb; }
 <tr><td>10</td><td>王俊涛</td><td>163.1h</td><td>2.1%</td></tr>
 </table>
 
-<div class="info-box">
-<strong>核心洞察：</strong>前5名成员工时占比73.2%，黄钟睿个人贡献28%（月均183.8h）。团队高度依赖核心成员，需关注人才梯队建设与风险分散。
+<div class="warning">
+<strong>⚠️ 数据呈现：</strong>前5名成员工时占比73.2%，黄钟睿个人贡献28%（月均183.8h）。团队高度依赖核心成员，需关注人才梯队建设与风险分散。
 </div>
 
 <h2>05 综合分析建议</h2>
-
-<h3>关键发现</h3>
-<table>
-<tr><th>维度</th><th>问题/现象</th><th>影响程度</th></tr>
-<tr><td>需求管理</td><td>37.4%需求无工时消耗，处于需求池积压状态</td><td><span class="highlight">高</span></td></tr>
-<tr><td>效能瓶颈</td><td>后端占77.5%工时，平均任务耗时25.97h</td><td><span class="highlight">高</span></td></tr>
-<tr><td>团队结构</td><td>前5名贡献73.2%工时，核心成员负载过重</td><td><span class="highlight">中</span></td></tr>
-<tr><td>任务分布</td><td>平均工时是中位数6.4倍，长尾需求严重</td><td><span class="highlight">中</span></td></tr>
-</table>
-
 <h3>行动建议</h3>
 
 <div class="success">
-<strong>1. 优化需求流程</strong><br>
-建立严格的需求准入和优先级排序机制，定期清理需求池，确保进入开发环节的需求都是高价值且定义清晰的，减少无效积压。
+<strong>💡 1. 优化需求流程</strong><br>
+建立严格的需求评审机制，定期检视需求池，确保进入开发环节的需求都是高价值且定义清晰的，减少无效积压。
 </div>
 
 <div class="success">
-<strong>2. 聚焦后端效能提升</strong><br>
-引入低代码平台、加强代码复用、推广自动化工具，目标将后端平均任务耗时从25.97h降低20%以上。
+<strong>💡 2. 聚焦后端效能提升</strong><br>
+引入低代码平台、加强代码复用、推广自动化工具，降低平均工时和单位工时。
 </div>
 
-<div class="info-box">
-<strong>3. 平衡团队负荷</strong><br>
-建立动态任务分配机制，通过跨职能协作、结对编程等方式分散核心成员压力，促进知识共享与梯队建设。
+<div class="success">
+<strong>💡 3. 平衡团队负荷</strong><br>
+建立动态任务分配机制，通过跨职能协作、赋能突破、带领成长等方式分散核心成员压力，促进知识共享与梯队建设。
 </div>
 
-<div class="info-box">
-<strong>4. 建立效能基线</strong><br>
-将关键指标（平均工时、中位数、角色占比）作为效能基线，每月跟踪复盘，实现数据驱动的持续改进。
+<div class="success">
+<strong>💡 4. 建立效能基线</strong><br>
+将关键指标（平均工时、中位数、角色占比）作为效能基线，定期跟踪复盘，实现数据驱动的持续改进。
 </div>
 
-<div class="warning">
-<strong>5. 风险预警机制</strong><br>
-关注核心成员工作负荷，设置工时上限预警；对超过100h的"长尾需求"进行专项复盘，提炼优化方案。
+<div class="success">
+<strong>💡 5. 管理工具优化</strong><br>
+优化现有项目管理工具，如禅道、钉钉、北极星，保障数据统一、功能高效好用。
 </div>
 
 <p style="font-size: 10px; color: #999; text-align: center; margin-top: 30px;">— 报告结束 —</p>
